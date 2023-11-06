@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}
+  labels:
+    app: {{ .Values.app.name }}
+    domain: {{ .Values.app.domain }}
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: "/metrics"
+    prometheus.io/port: "9252"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+      domain: {{ .Values.app.domain }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+        domain: {{ .Values.app.domain }}
+      annotations:
+      {{ if .Values.app.linkerd.enabled }}
+        linkerd.io/inject: enabled
+      {{ end }}
+    spec:
+      serviceAccountName: sa-{{ .Values.app.name }}
+      containers:
+        - name: web-app
+          image: {{ .Values.app.container.image }}
+          command:
+            - /microservice/bin/{{ .Values.app.name }}
+          args:
+            - -server
+          ports:
+            - containerPort: {{ .Values.app.service.http.port }}
+              protocol: TCP
+              name: http

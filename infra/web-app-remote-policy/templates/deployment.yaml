@@ -1,0 +1,102 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}
+  labels:
+    app: {{ .Values.app.name }}
+    domain: {{ .Values.app.domain }}
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: "/metrics"
+    prometheus.io/port: "9252"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+      domain: {{ .Values.app.domain }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+        domain: {{ .Values.app.domain }}
+      annotations:
+      {{ if .Values.app.linkerd.enabled }}
+        linkerd.io/inject: enabled
+      {{ end }}
+    spec:
+      serviceAccountName: sa-{{ .Values.app.name }}
+      initContainers:
+        - name: proxy-init
+          image: openpolicyagent/proxy_init:v5
+          # Configure the iptables bootstrap script to redirect traffic to the
+          # Envoy proxy on port 8000, specify that Envoy will be running as user
+          # 1111, and that we want to exclude port 8282 from the proxy for the
+          # OPA health checks. These values must match up with the configuration
+          # defined below for the "envoy" and "opa" containers.
+          args: ["-p", "8000", "-u", "1111", "-w", "8282"]
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+            runAsNonRoot: false
+            runAsUser: 0
+      containers:
+        - name: web-app
+          image: {{ .Values.app.container.image }}
+          command:
+            - /microservice/bin/{{ .Values.app.name }}
+          args:
+            - -server
+          ports:
+            - containerPort: {{ .Values.app.service.http.port }}
+              protocol: TCP
+              name: http
+        - name: envoy
+          image: envoyproxy/envoy:v1.18.3
+          securityContext:
+            runAsUser: 1111
+          volumeMounts:
+            - readOnly: true
+              mountPath: /config
+              name: proxy-config
+          args:
+            - "envoy"
+            - "--config-path"
+            - "/config/envoy.yaml"
+        - name: opa-envoy
+          image: openpolicyagent/opa:0.28.0-envoy
+          securityContext:
+            runAsUser: 1111
+          volumeMounts:
+            - readOnly: true
+              mountPath: /config
+              name: opa-config
+          args:
+            - "run"
+            - "--server"
+            - "--config-file=/config/config.yaml"
+            - "--addr=localhost:8181"
+            - "--diagnostic-addr=0.0.0.0:8282"
+            - "--ignore=.*"
+          livenessProbe:
+            httpGet:
+              path: /health?plugins
+              scheme: HTTP
+              port: 8282
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /health?plugins
+              scheme: HTTP
+              port: 8282
+            initialDelaySeconds: 5
+            periodSeconds: 5
+      volumes:
+        - name: proxy-config
+          configMap:
+            name: proxy-config
+        - name: opa-config
+          configMap:
+            name: {{ .Values.app.name }}-opa-config

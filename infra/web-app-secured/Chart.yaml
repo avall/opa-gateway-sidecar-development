@@ -1,0 +1,17 @@
+# A YAML file containing information about the chart
+# The chart API version (required)
+apiVersion: v2
+name: web-app-secured
+version: 0.1.0
+description: Helm chart for demo web app exposing restful api, where APIs are protected by OPA policies.
+type: application
+#keywords:
+#  - A list of keywords about this project (optional)
+home: https://gitlab.com/cloud.yantra.oss/opa-gateway-sidecar
+sources:
+  - https://gitlab.com/cloud.yantra.oss/opa-gateway-sidecar
+maintainers:
+  - name: Pratim Chaudhuri
+    email: pratim@chaudhuri.me
+appVersion: 0.1.0
+deprecated: false

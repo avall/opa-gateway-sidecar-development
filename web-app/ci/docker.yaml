@@ -1,0 +1,117 @@
+########################################################################################################################
+########################################################################################################################
+# Common before_script for GKE based environment
+# Ref:
+# - Gitlab Anchor: https://docs.gitlab.com/ee/ci/yaml/#anchors
+# - YAML Ref card: https://yaml.org/refcard.html
+########################################################################################################################
+########################################################################################################################
+
+.docker-publishing:
+  stage: build-container
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  before_script:
+    - export DOCKER_IMAGE_FULL_SHA=${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_SLUG}:${CI_COMMIT_SHA}
+    - export DOCKER_IMAGE_SHORT_SHA=${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_SLUG}:${CI_COMMIT_SHORT_SHA}
+    - export DOCKER_IMAGE_EDGE=${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_SLUG}:edge
+    - export DOCKER_IMAGE_RC=${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_SLUG}:rc
+    - export DOCKER_IMAGE_PRD=${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_SLUG}:release
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    - export PATH=/kaniko/:${PATH}
+    - export BUILD_CONTEXT="${CI_PROJECT_DIR}/web-app"
+    - cd "${CI_PROJECT_DIR}/web-app"
+
+#########################################################################################################
+#########################################################################################################
+# Building OCI compatible image
+#########################################################################################################
+#########################################################################################################
+
+build-container-branch-to-gitlab:
+  extends: .docker-publishing
+  script:
+    - /kaniko/executor
+      --build-arg MAINTAINER="${APP_MAINTAINER}"
+      --build-arg PACKAGE_NAME=web-app
+      --dockerfile ${BUILD_CONTEXT}/Dockerfile
+      --destination ${DOCKER_IMAGE_FULL_SHA}
+      --destination ${DOCKER_IMAGE_SHORT_SHA}
+      --context ${BUILD_CONTEXT}
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^(release-\d+(\.\d+)|(feature|bugfix|security|hotfix|test|f|b|s|h|t)\/[[:alnum:]](-|[[:alnum:]])*)$/
+      when: on_success
+    - when: never
+
+build-container-integration:
+  extends: .docker-publishing
+  script:
+    - /kaniko/executor
+      --build-arg MAINTAINER="${APP_MAINTAINER}"
+      --build-arg PACKAGE_NAME=web-app
+      --dockerfile ${BUILD_CONTEXT}/Dockerfile
+      --destination ${DOCKER_IMAGE_FULL_SHA}
+      --destination ${DOCKER_IMAGE_SHORT_SHA}
+      --destination ${DOCKER_IMAGE_EDGE}
+      --context ${BUILD_CONTEXT}
+  rules:
+    - if: $CI_COMMIT_BRANCH == "development"
+      when: on_success
+    - when: never
+
+build-container-production-release-candidate:
+  extends: .docker-publishing
+  script:
+    - /kaniko/executor
+      --build-arg MAINTAINER="${APP_MAINTAINER}"
+      --build-arg PACKAGE_NAME=web-app
+      --dockerfile ${BUILD_CONTEXT}/Dockerfile
+      --destination ${DOCKER_IMAGE_FULL_SHA}
+      --destination ${DOCKER_IMAGE_SHORT_SHA}
+      --destination ${DOCKER_IMAGE_RC}
+      --context ${BUILD_CONTEXT}
+  rules:
+    - if: $CI_COMMIT_BRANCH == "release-candidate" && $CI_COMMIT_REF_PROTECTED == "true"
+      when: on_success
+    - when: never
+
+build-container-production-release:
+  extends: .docker-publishing
+  script:
+    - export DOCKER_IMAGE_VERSION=$(echo ${APP_VERSION} | tr '[:upper:]' '[:lower:]')
+    - export DOCKER_IMAGE_TAG=${CI_REGISTRY_IMAGE}:${DOCKER_IMAGE_VERSION}
+    - export DOCKER_IMAGE_LATEST=${CI_REGISTRY_IMAGE}:latest
+    - /kaniko/executor
+      --build-arg MAINTAINER="${APP_MAINTAINER}"
+      --build-arg PACKAGE_NAME=web-app
+      --dockerfile ${BUILD_CONTEXT}/Dockerfile
+      --destination ${DOCKER_IMAGE_FULL_SHA}
+      --destination ${DOCKER_IMAGE_SHORT_SHA}
+      --destination ${DOCKER_IMAGE_PRD}
+      --destination ${DOCKER_IMAGE_TAG}
+      --context ${BUILD_CONTEXT}
+  rules:
+    - if: $CI_COMMIT_BRANCH == "production"
+      when: on_success
+    - when: never
+
+build-container-merge-requests:
+  extends: .docker-publishing
+  script:
+    - /kaniko/executor
+      --build-arg MAINTAINER="${APP_MAINTAINER}"
+      --build-arg PACKAGE_NAME=web-app
+      --dockerfile ${BUILD_CONTEXT}/Dockerfile
+      --destination ${DOCKER_IMAGE_FULL_SHA}
+      --destination ${DOCKER_IMAGE_SHORT_SHA}
+      --context ${BUILD_CONTEXT}
+  rules:
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "development"
+      when: on_success
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "release-candidate"
+      when: on_success
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "production"
+      when: on_success
+    - when: never

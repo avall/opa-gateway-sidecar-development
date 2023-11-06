@@ -1,0 +1,58 @@
+.opa-compile:
+  stage: compile
+  image:
+#    name: openpolicyagent/opa:0.28.0
+    name: curlimages/curl
+  before_script:
+    - cd "${CI_PROJECT_DIR}/web-app-authorization"
+    - curl -o opa -L https://github.com/open-policy-agent/opa/releases/download/v0.28.0/opa_linux_amd64
+    - chmod +x opa
+    - mkdir build
+  cache: {}
+  artifacts:
+    paths:
+      - web-app-authorization/build/bundle.tar.gz
+    expire_in: 15 minutes
+
+opa-compile:
+  extends: .opa-compile
+  script:
+    - ./opa build -o build/bundle.tar.gz policies/
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^(release-\d+(\.\d+)|(feature|bugfix|security|hotfix|test|f|b|s|h|t)\/[[:alnum:]](-|[[:alnum:]])*)$/
+      when: on_success
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "development"
+      when: on_success
+
+opa-compile-integration:
+  extends: .opa-compile
+  script:
+    - ./opa build -o build/bundle.tar.gz policies/
+  rules:
+    - if: $CI_COMMIT_BRANCH == "development"
+      when: on_success
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "release-candidate"
+      when: on_success
+    - if: $CI_COMMIT_TAG == $APP_VERSION
+      when: on_success
+
+opa-compile-release-candidate:
+  extends: .opa-compile
+  script:
+    - ./opa build -o build/bundle.tar.gz policies/
+  rules:
+    - if: $CI_COMMIT_BRANCH == "release-candidate"
+      when: on_success
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "production"
+      when: on_success
+    - if: $CI_COMMIT_TAG == $APP_VERSION
+      when: on_success
+
+# Release to production environment
+opa-compile-production:
+  extends: .opa-compile
+  script:
+    - ./opa build -o build/bundle.tar.gz policies/
+  rules:
+    - if: $CI_COMMIT_BRANCH == "production"
+      when: on_success

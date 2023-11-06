@@ -1,0 +1,26 @@
+############################################################
+# Example configuration to bootstrap OPA-Envoy sidecars.
+############################################################
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.app.name }}-opa-config
+data:
+  config.yaml: |
+    plugins:
+      envoy_ext_authz_grpc:
+        addr: :9191
+        path: demo/authz/allow
+    decision_logs:
+      console: true
+    services:
+      - name: web-app
+        url: "http://{{ .Values.app.name }}-opa-policy:{{ .Values.app.opa_policy.http.port }}"
+    bundles:
+      authz:
+        service: web-app
+        resource: bundle.tar.gz
+        persist: false
+        polling:
+          min_delay_seconds: 10
+          max_delay_seconds: 20

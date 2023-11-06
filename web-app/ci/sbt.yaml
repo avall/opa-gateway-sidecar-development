@@ -1,0 +1,69 @@
+#########################################################################################################
+#########################################################################################################
+# Stages for any SBT project
+#########################################################################################################
+#########################################################################################################
+variables:
+  SBT_OPTS: "-Dsbt.global.base=sbt-cache/.sbtboot -Dsbt.boot.directory=sbt-cache/.boot -Dsbt.ivy.home=sbt-cache/.ivy"
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - web-app/sbt-cache
+
+.sbt-compile:
+  stage: compile
+  image:
+    name: mozilla/sbt:latest
+  before_script:
+    - cd "${CI_PROJECT_DIR}/web-app"
+  artifacts:
+    paths:
+      - web-app/target/universal/stage
+    expire_in: 15 minutes
+
+app-compile:
+  extends: .sbt-compile
+  script:
+    - export APP_VERSION=${APP_VERSION}-${CI_COMMIT_BRANCH}-PRESNAPSHOT
+    - sbt clean compile stage
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^(release-\d+(\.\d+)|(feature|bugfix|security|hotfix|test|f|b|s|h|t)\/[[:alnum:]](-|[[:alnum:]])*)$/
+      when: on_success
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "development"
+      when: on_success
+
+app-compile-integration:
+  extends: .sbt-compile
+  script:
+    - export APP_VERSION=${APP_VERSION}-SNAPSHOT
+    - sbt clean compile stage
+  rules:
+    - if: $CI_COMMIT_BRANCH == "development"
+      when: on_success
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "release-candidate"
+      when: on_success
+    - if: $CI_COMMIT_TAG == $APP_VERSION
+      when: on_success
+
+app-compile-release-candidate:
+  extends: .sbt-compile
+  script:
+    - export APP_VERSION=${APP_VERSION}-RC
+    - sbt clean compile stage
+  rules:
+    - if: $CI_COMMIT_BRANCH == "release-candidate"
+      when: on_success
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "production"
+      when: on_success
+    - if: $CI_COMMIT_TAG == $APP_VERSION
+      when: on_success
+
+# Release to production environment
+app-compile-production:
+  extends: .sbt-compile
+  script:
+    - sbt clean compile stage
+  rules:
+    - if: $CI_COMMIT_BRANCH == "production"
+      when: on_success

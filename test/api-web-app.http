@@ -1,0 +1,112 @@
+
+####################################################################################################################################
+# As teacher Amanda
+####################################################################################################################################
+###
+# As teacher Amanda
+GET http://192.168.49.2:31942/students
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjZW50cmFsLWF1dGgtc2VydmVyIiwiYXVkIjoiZGVtby1hcHAiLCJzdWIiOiJhbWFuZGFAZXhhbXBsZS5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInRlYWNoZXIiLCJhY2Nlc3MudGVhY2hlci50MSIsImFjY2Vzcy5zdHVkZW50LnMxIiwiYWNjZXNzLnN0dWRlbnQuczIiXSwianRpIjoiOTk1OTUyZjItMDZiYS00NDhiLTkxYTktMmQ3MTdiNTY2NmI0IiwiaWF0IjoxNjIxMjU3NjgzLCJleHAiOjE2MjEyNjEyODN9.cF3bB5f84WN85XE3a1dEZSoXQl9AO_oawN1xLXw_92Q
+
+###
+# As teacher Amanda
+GET http://192.168.49.2:31942/students/s1/profile
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjZW50cmFsLWF1dGgtc2VydmVyIiwiYXVkIjoiZGVtby1hcHAiLCJzdWIiOiJhbWFuZGFAZXhhbXBsZS5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInRlYWNoZXIiLCJhY2Nlc3MudGVhY2hlci50MSIsImFjY2Vzcy5zdHVkZW50LnMxIiwiYWNjZXNzLnN0dWRlbnQuczIiXSwianRpIjoiOTk1OTUyZjItMDZiYS00NDhiLTkxYTktMmQ3MTdiNTY2NmI0IiwiaWF0IjoxNjIxMjU3NjgzLCJleHAiOjE2MjEyNjEyODN9.cF3bB5f84WN85XE3a1dEZSoXQl9AO_oawN1xLXw_92Q
+
+###
+# As teacher Amanda
+GET http://192.168.49.2:31942/students/s1/public-profile
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjZW50cmFsLWF1dGgtc2VydmVyIiwiYXVkIjoiZGVtby1hcHAiLCJzdWIiOiJhbWFuZGFAZXhhbXBsZS5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInRlYWNoZXIiLCJhY2Nlc3MudGVhY2hlci50MSIsImFjY2Vzcy5zdHVkZW50LnMxIiwiYWNjZXNzLnN0dWRlbnQuczIiXSwianRpIjoiOTk1OTUyZjItMDZiYS00NDhiLTkxYTktMmQ3MTdiNTY2NmI0IiwiaWF0IjoxNjIxMjU3NjgzLCJleHAiOjE2MjEyNjEyODN9.cF3bB5f84WN85XE3a1dEZSoXQl9AO_oawN1xLXw_92Q
+
+###
+# As teacher Amanda
+GET http://192.168.49.2:31942/students/s2/profile
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjZW50cmFsLWF1dGgtc2VydmVyIiwiYXVkIjoiZGVtby1hcHAiLCJzdWIiOiJhbWFuZGFAZXhhbXBsZS5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInRlYWNoZXIiLCJhY2Nlc3MudGVhY2hlci50MSIsImFjY2Vzcy5zdHVkZW50LnMxIiwiYWNjZXNzLnN0dWRlbnQuczIiXSwianRpIjoiOTk1OTUyZjItMDZiYS00NDhiLTkxYTktMmQ3MTdiNTY2NmI0IiwiaWF0IjoxNjIxMjU3NjgzLCJleHAiOjE2MjEyNjEyODN9.cF3bB5f84WN85XE3a1dEZSoXQl9AO_oawN1xLXw_92Q
+
+###
+# As teacher Amanda
+GET http://192.168.49.2:31942/students/s2/public-profile
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjZW50cmFsLWF1dGgtc2VydmVyIiwiYXVkIjoiZGVtby1hcHAiLCJzdWIiOiJhbWFuZGFAZXhhbXBsZS5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInRlYWNoZXIiLCJhY2Nlc3MudGVhY2hlci50MSIsImFjY2Vzcy5zdHVkZW50LnMxIiwiYWNjZXNzLnN0dWRlbnQuczIiXSwianRpIjoiOTk1OTUyZjItMDZiYS00NDhiLTkxYTktMmQ3MTdiNTY2NmI0IiwiaWF0IjoxNjIxMjU3NjgzLCJleHAiOjE2MjEyNjEyODN9.cF3bB5f84WN85XE3a1dEZSoXQl9AO_oawN1xLXw_92Q
+
+###
+# As teacher Amanda
+GET http://192.168.49.2:31942/teachers
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjZW50cmFsLWF1dGgtc2VydmVyIiwiYXVkIjoiZGVtby1hcHAiLCJzdWIiOiJhbWFuZGFAZXhhbXBsZS5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInRlYWNoZXIiLCJhY2Nlc3MudGVhY2hlci50MSIsImFjY2Vzcy5zdHVkZW50LnMxIiwiYWNjZXNzLnN0dWRlbnQuczIiXSwianRpIjoiOTk1OTUyZjItMDZiYS00NDhiLTkxYTktMmQ3MTdiNTY2NmI0IiwiaWF0IjoxNjIxMjU3NjgzLCJleHAiOjE2MjEyNjEyODN9.cF3bB5f84WN85XE3a1dEZSoXQl9AO_oawN1xLXw_92Q
+
+###
+####################################################################################################################################
+# As teacher John
+####################################################################################################################################
+###
+GET http://192.168.49.2:31942/students
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjZW50cmFsLWF1dGgtc2VydmVyIiwiYXVkIjoiZGVtby1hcHAiLCJzdWIiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZXMiOlsidGVhY2hlciIsImFjY2Vzcy50ZWFjaGVyLnQyIiwiYWNjZXNzLnN0dWRlbnQuczMiLCJhY2Nlc3Muc3R1ZGVudC5zNCJdLCJqdGkiOiIwMWMxN2Q3My1jN2VjLTRiMWYtOTgyNi1hODQ2YTc4YTI3MmQiLCJpYXQiOjE2MjEyNTg5NjcsImV4cCI6MTYyMTI2MjU2N30.rt7V7PBsI0-309Kx19VQs3kue5NoTraJOwXUwThyx9I
+
+###
+GET http://192.168.49.2:31942/students/s3/profile
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjZW50cmFsLWF1dGgtc2VydmVyIiwiYXVkIjoiZGVtby1hcHAiLCJzdWIiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZXMiOlsidGVhY2hlciIsImFjY2Vzcy50ZWFjaGVyLnQyIiwiYWNjZXNzLnN0dWRlbnQuczMiLCJhY2Nlc3Muc3R1ZGVudC5zNCJdLCJqdGkiOiIwMWMxN2Q3My1jN2VjLTRiMWYtOTgyNi1hODQ2YTc4YTI3MmQiLCJpYXQiOjE2MjEyNTg5NjcsImV4cCI6MTYyMTI2MjU2N30.rt7V7PBsI0-309Kx19VQs3kue5NoTraJOwXUwThyx9I
+
+###
+GET http://192.168.49.2:31942/students/s3/public-profile
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjZW50cmFsLWF1dGgtc2VydmVyIiwiYXVkIjoiZGVtby1hcHAiLCJzdWIiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZXMiOlsidGVhY2hlciIsImFjY2Vzcy50ZWFjaGVyLnQyIiwiYWNjZXNzLnN0dWRlbnQuczMiLCJhY2Nlc3Muc3R1ZGVudC5zNCJdLCJqdGkiOiIwMWMxN2Q3My1jN2VjLTRiMWYtOTgyNi1hODQ2YTc4YTI3MmQiLCJpYXQiOjE2MjEyNTg5NjcsImV4cCI6MTYyMTI2MjU2N30.rt7V7PBsI0-309Kx19VQs3kue5NoTraJOwXUwThyx9I
+
+###
+GET http://192.168.49.2:31942/students/s4/profile
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjZW50cmFsLWF1dGgtc2VydmVyIiwiYXVkIjoiZGVtby1hcHAiLCJzdWIiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZXMiOlsidGVhY2hlciIsImFjY2Vzcy50ZWFjaGVyLnQyIiwiYWNjZXNzLnN0dWRlbnQuczMiLCJhY2Nlc3Muc3R1ZGVudC5zNCJdLCJqdGkiOiIwMWMxN2Q3My1jN2VjLTRiMWYtOTgyNi1hODQ2YTc4YTI3MmQiLCJpYXQiOjE2MjEyNTg5NjcsImV4cCI6MTYyMTI2MjU2N30.rt7V7PBsI0-309Kx19VQs3kue5NoTraJOwXUwThyx9I
+
+
+###
+# As teacher Amanda
+GET http://192.168.49.2:31942/students/s4/public-profile
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjZW50cmFsLWF1dGgtc2VydmVyIiwiYXVkIjoiZGVtby1hcHAiLCJzdWIiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZXMiOlsidGVhY2hlciIsImFjY2Vzcy50ZWFjaGVyLnQyIiwiYWNjZXNzLnN0dWRlbnQuczMiLCJhY2Nlc3Muc3R1ZGVudC5zNCJdLCJqdGkiOiIwMWMxN2Q3My1jN2VjLTRiMWYtOTgyNi1hODQ2YTc4YTI3MmQiLCJpYXQiOjE2MjEyNTg5NjcsImV4cCI6MTYyMTI2MjU2N30.rt7V7PBsI0-309Kx19VQs3kue5NoTraJOwXUwThyx9I
+
+###
+GET http://192.168.49.2:31942/teachers
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjZW50cmFsLWF1dGgtc2VydmVyIiwiYXVkIjoiZGVtby1hcHAiLCJzdWIiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZXMiOlsidGVhY2hlciIsImFjY2Vzcy50ZWFjaGVyLnQyIiwiYWNjZXNzLnN0dWRlbnQuczMiLCJhY2Nlc3Muc3R1ZGVudC5zNCJdLCJqdGkiOiIwMWMxN2Q3My1jN2VjLTRiMWYtOTgyNi1hODQ2YTc4YTI3MmQiLCJpYXQiOjE2MjEyNTg5NjcsImV4cCI6MTYyMTI2MjU2N30.rt7V7PBsI0-309Kx19VQs3kue5NoTraJOwXUwThyx9I
+
+###
+####################################################################################################################################
+# As Student Amit
+####################################################################################################################################
+###
+GET http://192.168.49.2:31942/students
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjZW50cmFsLWF1dGgtc2VydmVyIiwiYXVkIjoiZGVtby1hcHAiLCJzdWIiOiJzdHVkZW50LmFtaXRAZXhhbXBsZS5jb20iLCJyb2xlcyI6WyJzdHVkZW50IiwiYWNjZXNzLnN0dWRlbnQuczEiXSwianRpIjoiNDY4ZmRmMWItYjZhOS00Y2I1LWIyYjctY2RmMTJjMzMyZjY2IiwiaWF0IjoxNjIxMjU5MDM4LCJleHAiOjE2MjEyNjI2Mzh9.Pfx5lQU5KqMMDTLNFflwNd_p9_I17eMlErmUAk_X4bQ
+
+###
+GET http://192.168.49.2:31942/students/s1/profile
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjZW50cmFsLWF1dGgtc2VydmVyIiwiYXVkIjoiZGVtby1hcHAiLCJzdWIiOiJzdHVkZW50LmFtaXRAZXhhbXBsZS5jb20iLCJyb2xlcyI6WyJzdHVkZW50IiwiYWNjZXNzLnN0dWRlbnQuczEiXSwianRpIjoiNDY4ZmRmMWItYjZhOS00Y2I1LWIyYjctY2RmMTJjMzMyZjY2IiwiaWF0IjoxNjIxMjU5MDM4LCJleHAiOjE2MjEyNjI2Mzh9.Pfx5lQU5KqMMDTLNFflwNd_p9_I17eMlErmUAk_X4bQ
+
+###
+GET http://192.168.49.2:31942/students/s1/public-profile
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjZW50cmFsLWF1dGgtc2VydmVyIiwiYXVkIjoiZGVtby1hcHAiLCJzdWIiOiJzdHVkZW50LmFtaXRAZXhhbXBsZS5jb20iLCJyb2xlcyI6WyJzdHVkZW50IiwiYWNjZXNzLnN0dWRlbnQuczEiXSwianRpIjoiNDY4ZmRmMWItYjZhOS00Y2I1LWIyYjctY2RmMTJjMzMyZjY2IiwiaWF0IjoxNjIxMjU5MDM4LCJleHAiOjE2MjEyNjI2Mzh9.Pfx5lQU5KqMMDTLNFflwNd_p9_I17eMlErmUAk_X4bQ
+
+###
+GET http://192.168.49.2:31942/students/s4/profile
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjZW50cmFsLWF1dGgtc2VydmVyIiwiYXVkIjoiZGVtby1hcHAiLCJzdWIiOiJzdHVkZW50LmFtaXRAZXhhbXBsZS5jb20iLCJyb2xlcyI6WyJzdHVkZW50IiwiYWNjZXNzLnN0dWRlbnQuczEiXSwianRpIjoiNDY4ZmRmMWItYjZhOS00Y2I1LWIyYjctY2RmMTJjMzMyZjY2IiwiaWF0IjoxNjIxMjU5MDM4LCJleHAiOjE2MjEyNjI2Mzh9.Pfx5lQU5KqMMDTLNFflwNd_p9_I17eMlErmUAk_X4bQ
+
+###
+# As teacher Amanda
+GET http://192.168.49.2:31942/students/s4/public-profile
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjZW50cmFsLWF1dGgtc2VydmVyIiwiYXVkIjoiZGVtby1hcHAiLCJzdWIiOiJzdHVkZW50LmFtaXRAZXhhbXBsZS5jb20iLCJyb2xlcyI6WyJzdHVkZW50IiwiYWNjZXNzLnN0dWRlbnQuczEiXSwianRpIjoiNDY4ZmRmMWItYjZhOS00Y2I1LWIyYjctY2RmMTJjMzMyZjY2IiwiaWF0IjoxNjIxMjU5MDM4LCJleHAiOjE2MjEyNjI2Mzh9.Pfx5lQU5KqMMDTLNFflwNd_p9_I17eMlErmUAk_X4bQ
+
+###
+GET http://192.168.49.2:31942/teachers
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjZW50cmFsLWF1dGgtc2VydmVyIiwiYXVkIjoiZGVtby1hcHAiLCJzdWIiOiJzdHVkZW50LmFtaXRAZXhhbXBsZS5jb20iLCJyb2xlcyI6WyJzdHVkZW50IiwiYWNjZXNzLnN0dWRlbnQuczEiXSwianRpIjoiNDY4ZmRmMWItYjZhOS00Y2I1LWIyYjctY2RmMTJjMzMyZjY2IiwiaWF0IjoxNjIxMjU5MDM4LCJleHAiOjE2MjEyNjI2Mzh9.Pfx5lQU5KqMMDTLNFflwNd_p9_I17eMlErmUAk_X4bQ
+
+###

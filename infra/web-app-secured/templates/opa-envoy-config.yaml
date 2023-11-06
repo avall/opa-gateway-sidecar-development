@@ -1,0 +1,15 @@
+############################################################
+# Example configuration to bootstrap OPA-Envoy sidecars.
+############################################################
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.app.name }}-opa-config
+data:
+  config.yaml: |
+    plugins:
+      envoy_ext_authz_grpc:
+        addr: :9191
+        path: demo/authz/allow
+    decision_logs:
+      console: true

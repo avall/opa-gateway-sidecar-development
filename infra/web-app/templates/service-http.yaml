@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.app.name }}-http
+  labels:
+{{ include "service.labels" . | indent 4 }}
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+spec:
+  ports:
+    - port: {{ .Values.app.service.http.port }}
+      protocol: {{ .Values.app.service.http.protocol }}
+      targetPort: {{ .Values.app.service.http.port }}
+      name: http
+  selector:
+    app: {{ .Values.app.name }}
+    domain: {{ .Values.app.domain }}
+  type: ClusterIP
+
+---

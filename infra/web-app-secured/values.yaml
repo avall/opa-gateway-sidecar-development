@@ -1,0 +1,11 @@
+app:
+  name: web-app
+  domain: demo
+  container:
+    image: registry.gitlab.com/cloud.yantra.oss/opa-gateway-sidecar/development:edge
+  service:
+    http:
+      port: 8080
+      protocol: TCP
+  linkerd:
+    enabled: false
